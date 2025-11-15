@@ -11,6 +11,8 @@ import cartRoutes from "./routes/cart.routes.js";
 import couponRoutes from "./routes/coupon.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
+import { getUserProfile } from "./controllers/auth.controller.js";
+import { authMiddleware } from "./middleware/auth.middleware.js";
 
 dotenv.config();
 
