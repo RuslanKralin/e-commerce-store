@@ -1,11 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./lib/db.js";
-import authRoute from "./routes/auth.route.js";
-import productsRoute from "./routes/products.route.js";
-import cartRoute from "./routes/cart.route.js";
-import couponsRoute from "./routes/coupon.route.js";
-import paymentRoute from "./routes/payment.route.js";
+import authRoutes from "./routes/auth.routes.js";
+import productsRoutes from "./routes/products.routes.js";
+import cartRoutes from "./routes/cart.routes.js";
+import couponRoutes from "./routes/coupon.routes.js";
+import paymentRoutes from "./routes/payment.routes.js";
+import analyticsRoutes from "./routes/analytics.routes.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -18,11 +19,12 @@ app.use(express.json());
 
 app.use(cookieParser()); // чтоб достать refreshToken из cookie
 
-app.use("/api/auth", authRoute);
-app.use("/api/products", productsRoute);
-app.use("/api/cart", cartRoute);
-app.use("/api/coupons", couponsRoute);
-app.use("/api/payment", paymentRoute);
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productsRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/coupons", couponRoutes);
+app.use("/api/payment", paymentRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 app.listen(PORT, () => {
   connectDB();
