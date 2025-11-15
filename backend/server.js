@@ -5,6 +5,7 @@ import authRoute from "./routes/auth.route.js";
 import productsRoute from "./routes/products.route.js";
 import cartRoute from "./routes/cart.route.js";
 import couponsRoute from "./routes/coupon.route.js";
+import paymentRoute from "./routes/payment.route.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/products", productsRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/coupons", couponsRoute);
+app.use("/api/payment", paymentRoute);
 
 app.listen(PORT, () => {
   connectDB();

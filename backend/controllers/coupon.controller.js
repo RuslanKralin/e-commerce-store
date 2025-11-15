@@ -2,8 +2,8 @@ import Coupon from "../models/coupon.model.js";
 
 export const createCoupon = async (req, res) => {
   try {
-    const { name, code, discount } = req.body;
-    const coupon = await Coupon.create({ name, code, discount });
+    const { name, code, discountPercentage } = req.body;
+    const coupon = await Coupon.create({ name, code, discountPercentage });
     res.status(201).json(coupon);
   } catch (error) {
     console.log("ошибка в createCoupon контроллере", error);
@@ -13,6 +13,7 @@ export const createCoupon = async (req, res) => {
 
 export const getCoupon = async (req, res) => {
   try {
+    // получаем все активные купоны пользователя
     const coupons = await Coupon.find({ user: req.user._id, isActive: true });
     res.status(200).json(coupons || null);
   } catch (error) {
@@ -21,6 +22,7 @@ export const getCoupon = async (req, res) => {
   }
 };
 
+// проверяем валидность купона перед тем как добавить его в корзину
 export const validateCoupon = async (req, res) => {
   try {
     const { code } = req.body;
@@ -32,7 +34,7 @@ export const validateCoupon = async (req, res) => {
     if (!coupon) {
       return res.status(404).json({ message: "Coupon not found" });
     }
-    if (coupon.expiryDate < Date.now()) {
+    if (coupon.expiryDate < new Date()) {
       coupon.isActive = false;
       await coupon.save();
       return res.status(400).json({ message: "Coupon expired" });
@@ -40,7 +42,7 @@ export const validateCoupon = async (req, res) => {
     res.status(200).json({
       message: "Coupon validated successfully",
       code: coupon.code,
-      discount: coupon.discount,
+      discountPercentage: coupon.discountPercentage,
     });
   } catch (error) {
     console.log("ошибка в validateCoupon контроллере", error);
