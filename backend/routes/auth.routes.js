@@ -16,4 +16,6 @@ router.post("/logout", logout);
 
 router.post("/refresh", refresh);
 
+router.get("/profile", authMiddleware, getUserProfile);
+
 export default router;

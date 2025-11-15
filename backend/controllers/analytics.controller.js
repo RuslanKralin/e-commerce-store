@@ -86,7 +86,7 @@ const getDailySalesData = async (startDate, endDate) => {
       };
     });
   } catch (error) {
-    console.log("ошибка в getDailySalesData контроллере", error);
+    console.log("ошибка в getDailySalesData", error);
     throw error;
   }
 };

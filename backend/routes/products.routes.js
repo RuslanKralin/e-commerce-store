@@ -13,7 +13,7 @@ import { adminMiddleware } from "../middleware/admin.middleware.js";
 
 const router = express.Router();
 
-router.get("/", authMiddleware, adminMiddleware, getAllProducts);
+router.get("/", authMiddleware, getAllProducts);
 router.post("/", authMiddleware, adminMiddleware, createProduct);
 router.patch("/:id", authMiddleware, adminMiddleware, toggleFeaturedProduct);
 router.get("/featured", authMiddleware, adminMiddleware, getFeaturedProducts);

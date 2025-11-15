@@ -187,7 +187,6 @@ export const refresh = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        wer: "срака",
       },
       message: "Токены успешно обновлены",
     });
@@ -197,5 +196,13 @@ export const refresh = async (req, res) => {
       message: "Ошибка сервера",
       error: error.message,
     });
+  }
+};
+
+export const getUserProfile = async (req, res) => {
+  try {
+    res.status(200).json({ user: req.user });
+  } catch (error) {
+    console.log("ошибка в getUserProfile контроллере", error);
   }
 };
